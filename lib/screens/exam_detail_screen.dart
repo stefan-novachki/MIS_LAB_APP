@@ -5,9 +5,8 @@ class ExamDetailScreen extends StatelessWidget {
   final Exam exam;
 
   const ExamDetailScreen({
-    Key? key,
     required this.exam,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +14,7 @@ class ExamDetailScreen extends StatelessWidget {
     final difference = exam.dateTime.difference(now);
     final days = difference.inDays;
     final hours = difference.inHours % 24;
+    final isPassed = exam.isPassed();
 
     return Scaffold(
       appBar: AppBar(
@@ -25,24 +25,52 @@ class ExamDetailScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Предмет: ${exam.subject}',
-              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Icon(Icons.school, size: 28),
+                SizedBox(width: 12),
+                Text(
+                  exam.subject,
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ],
+            ),
+            const SizedBox(height: 24),
+            Row(
+              children: [
+                Icon(Icons.calendar_today, color: Colors.blue),
+                SizedBox(width: 12),
+                Text(
+                  '${exam.dateTime.day}/${exam.dateTime.month}/${exam.dateTime.year} ${exam.dateTime.hour}:${exam.dateTime.minute.toString().padLeft(2, '0')}',
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
-            Text(
-              'Датум и време: ${exam.dateTime.day}/${exam.dateTime.month}/${exam.dateTime.year} ${exam.dateTime.hour}:${exam.dateTime.minute.toString().padLeft(2, '0')}',
-              style: const TextStyle(fontSize: 16),
+            Row(
+              children: [
+                Icon(Icons.access_time, color: Colors.orange),
+                SizedBox(width: 12),
+                Text(
+                  isPassed ? 'Завршено' : '$days дена, $hours часа',
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: isPassed ? Colors.red : Colors.green,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
-            Text(
-              'Време до испит: $days дена, $hours часа',
-              style: const TextStyle(fontSize: 16, color: Colors.red),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Училници: ${exam.rooms.join(', ')}',
-              style: const TextStyle(fontSize: 16),
+            Row(
+              children: [
+                Icon(Icons.location_on, color: Colors.purple),
+                SizedBox(width: 12),
+                Text(
+                  exam.rooms.join(', '),
+                  style: const TextStyle(fontSize: 16),
+                ),
+              ],
             ),
           ],
         ),

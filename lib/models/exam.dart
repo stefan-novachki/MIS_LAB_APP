@@ -1,11 +1,15 @@
 class Exam {
-  String subject;
-  DateTime dateTime;
-  List<String> rooms;
+  final String subject;
+  final DateTime dateTime;
+  final List<String> rooms;
 
   Exam({
     required this.subject,
     required this.dateTime,
     required this.rooms,
   });
+
+  bool isPassed() {
+    return dateTime.isBefore(DateTime.now());
+  }
 }

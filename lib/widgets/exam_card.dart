@@ -6,21 +6,42 @@ class ExamCard extends StatelessWidget {
   final VoidCallback onTap;
 
   const ExamCard({
-    Key? key,
     required this.exam,
     required this.onTap,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final isPassed = exam.isPassed();
+    final backgroundColor = isPassed ? Colors.grey[300] : Colors.blue[50];
+    final textColor = isPassed ? Colors.grey[600] : Colors.black;
+
     return Card(
       margin: const EdgeInsets.all(8.0),
+      color: backgroundColor,
       child: ListTile(
-        title: Text(exam.subject),
-        subtitle: Text(
-          '${exam.dateTime.day}/${exam.dateTime.month}/${exam.dateTime.year} - ${exam.dateTime.hour}:${exam.dateTime.minute.toString().padLeft(2, '0')}',
+        leading: Icon(
+          Icons.school,
+          color: isPassed ? Colors.grey : Colors.blue,
         ),
-        trailing: Text(exam.rooms.join(', ')),
+        title: Text(
+          exam.subject,
+          style: TextStyle(
+            color: textColor,
+            decoration: isPassed ? TextDecoration.lineThrough : null,
+          ),
+        ),
+        subtitle: Row(
+          children: [
+            Icon(Icons.calendar_today, size: 16),
+            SizedBox(width: 4),
+            Text('${exam.dateTime.day}/${exam.dateTime.month}/${exam.dateTime.year}'),
+          ],
+        ),
+        trailing: Icon(
+          Icons.location_on,
+          color: isPassed ? Colors.grey : Colors.orange,
+        ),
         onTap: onTap,
       ),
     );
