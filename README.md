@@ -1,16 +1,52 @@
-# lab_app
+# Lab App - Распоред на испити
 
-A new Flutter project.
+Апликација за приказ на распоред на испити развиена со Flutter.
 
-## Getting Started
+## Функционалности
 
-This project is a starting point for a Flutter application.
+- Приказ на листа со 12 испити
+- Детален преглед на секој испит
+- Приказ на време преостанато до испитот
+- Приказ на училници за секој испит
+- Икони релевантни за секој елемент
+- Различни бои за поминати и идни испити
+- Хронолошко подредување по датум
+- Беџ со вкупен број на испити
 
-A few resources to get you started if this is your first Flutter project:
+## Захтеви
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Flutter SDK
+- Android Studio или VS Code
+- Dart
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Структура на проектот
+
+```
+lib/
+├── main.dart
+├── models/
+│   └── exam.dart
+├── screens/
+│   ├── exam_list_screen.dart
+│   └── exam_detail_screen.dart
+└── widgets/
+    └── exam_card.dart
+```
+
+## Screenshots
+
+### Главен екран - Листа на испити
+
+![Exam List](screenshots/exam_list.png)
+
+На главниот екран е комплетната листа на сите 12 испити. Испитите се подредени по датум, почнувајќи од архивираните испити (сива боја) па се до идните испити (синa боја). На дното на екранот има беџ кој покажува вкупен број на испити.
+
+### Детален преглед на испит
+
+![Exam Detail](screenshots/exam_detail.png)
+
+Кога кликнете на еден испит, се отвара деталниот преглед. Тука има целосна информација за испитот вклучување датум, време, време преостанато до испитот и сите училници каде се одржува.
+
+## Автор
+
+Стефан Новачки - Индекс 225086
